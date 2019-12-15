@@ -2,7 +2,9 @@
   <div class="cover">
   </div>
   <div class="button">
-    <a href="" class="btn btn-info btn-lg">登録はこちら</a>
+    <% unless logged_in? %>
+      <%= link_to '登録はこちら', signup_path, class: 'btn btn-info btn-lg' %>
+    <% end %>
   </div>
 <% end %>
 
