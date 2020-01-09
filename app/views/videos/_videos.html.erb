@@ -1,0 +1,21 @@
+<% if videos %>
+  <div class="row">
+    <% videos.each do |video| %>
+        <div class="video">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-info">
+              <div class="panel-heading text-center">
+                <img src="<%= video.thumbnail_url %>" alt="" >
+              </div>
+              <div class="panel-body">
+                <p class="video-title"><%= video.video_title %></p>
+              </div>
+              <div class="panel-footer text-center">
+                <p class="channel-title"><%= video.channel_title %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+<% end %>
