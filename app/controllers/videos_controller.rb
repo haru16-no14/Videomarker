@@ -16,7 +16,7 @@ class VideosController < ApplicationController
       results = youtube.list_searches(part="snippet" , 
                                     type: "video" ,
                                     q: @keyword , 
-                                    max_results: 3 , 
+                                    max_results: 12 , 
                                     order: :date , 
       )
       
