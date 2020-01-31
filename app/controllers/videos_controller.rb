@@ -2,6 +2,10 @@ class VideosController < ApplicationController
   before_action :require_user_logged_in
   require 'google/apis/youtube_v3'
  
+ def show
+   @marker = Marker.find(params[:id])
+ end
+ 
   def new
     @videos = []
     
@@ -12,32 +16,35 @@ class VideosController < ApplicationController
       results = youtube.list_searches(part="snippet" , 
                                     type: "video" ,
                                     q: @keyword , 
-                                    max_results: 12 , 
+                                    max_results: 3 , 
                                     order: :date , 
       )
       
       results.items.each do |item|
-        video = Video.new(read(item))
+        video = Video.find_or_initialize_by(read(item))
         @videos << video
       end
     end
   end
   
-  private
-  
-  def read(item)
-    id = item.id
-    snippet = item.snippet    
-    video_id = id.video_id
-    video_title = snippet.title
-    channel_title = snippet.channel_title 
-    thumbnail_url= snippet.thumbnails.medium.url
+  def create
+    @video = Video.find_or_initialize_by(video_id: params[:video_id])
+
+    unless @video.persisted?
+      # @video が保存されていない場合、先に @video を保存する
+      youtube = Google::Apis::YoutubeV3::YouTubeService.new
+      youtube.key = "AIzaSyBygnUHbJ6EfyBuzIoVNBkAFv1QCzImt-4"
+      results = youtube.list_searches(part="snippet" ,
+                                      type: "video" ,
+                                      q: @video.video_id,
+                                      max_results: 1 ,)
+
+      results.items.each do |item|
+        @video = Video.new(read(item))
+        @video.save
+      end
+    end
     
-    {
-      video_id: video_id,
-      video_title: video_title,
-      channel_title: channel_title, 
-      thumbnail_url: thumbnail_url,
-    }
+    redirect_to new_marker_path(id: @video.id)
   end
 end

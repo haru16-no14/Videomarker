@@ -1,0 +1,11 @@
+<div class="player text-center">
+    <p><%= @marker.video.video_title %></p>
+    <% start = @marker.time.strftime("%-H:%-M:%-S") %>
+    <div class="box">
+        <span class="box-title"><%= start %></span>
+        <p><%= @marker.content %></p>
+    </div>
+    <% seconds = start.split(/:/).map(&:to_i).inject{|x,y| x*60+y} %>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @marker.video.video_id %>?start=<%= seconds %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <p><%= @marker.video.channel_title %></p>
+</div>

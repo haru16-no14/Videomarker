@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200102110054) do
+ActiveRecord::Schema.define(version: 20200109163003) do
+
+  create_table "markers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "content"
+    t.time     "time"
+    t.integer  "user_id"
+    t.integer  "video_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_markers_on_user_id", using: :btree
+    t.index ["video_id"], name: "index_markers_on_video_id", using: :btree
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -30,4 +41,6 @@ ActiveRecord::Schema.define(version: 20200102110054) do
     t.datetime "updated_at",    null: false
   end
 
+  add_foreign_key "markers", "users"
+  add_foreign_key "markers", "videos"
 end

@@ -1,0 +1,7 @@
+<%= form_tag(videos_path) do %>
+  <%= hidden_field_tag :video_id, video.video_id %>
+  <%= hidden_field_tag :video_title, video.video_title %>
+  <%= hidden_field_tag :channel_title, video.channel_title %>
+  <%= hidden_field_tag :thumbnail_url, video.thumbnail_url %>
+  <%= submit_tag 'Play', class: 'btn btn-primary btn-block' %>
+<% end %>

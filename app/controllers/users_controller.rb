@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @markers = @user.markers
+    @marker = Marker.new
   end
 
   def new

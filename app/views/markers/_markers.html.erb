@@ -1,0 +1,27 @@
+<% if markers %>
+  <div class="row">
+    <% markers.each do |marker| %>
+        <div class="marker">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-info">
+              <div class="panel-heading text-center">
+                <img src="<%= marker.video.thumbnail_url %>" alt="" >
+              </div>
+              <div class="panel-body">
+                <p class="video-title"><%= link_to marker.video.video_title, video_path(marker.id) %></p>
+                <p class="channel-title"><%= marker.video.channel_title %></p>
+              </div>
+              <div class="panel-footer">
+                <p class="marker-memo"><%= marker.content %></p>
+                <div style="text-align:center;">
+                  <% if current_user == marker.user %>
+                      <%= link_to "Delete", marker, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+<% end %>

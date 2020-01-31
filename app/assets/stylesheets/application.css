@@ -52,12 +52,55 @@ footer {
   max-width: 100%;
 }
 .video-title {
-  /* 文の行数を2行に保ち、最後に ... を追加するスタイル */
+  /* 文の行数を3行に保ち、最後に ... を追加するスタイル */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
-.channel-title {
+.video .channel-title {
   overflow: hidden;
+}
+
+/* marker */
+.marker .panel-body {
+  height: 110px;
+}
+.marker .panel-heading {
+  height: 200px;
+}
+.marker .panel-heading img {
+  height: 100%;
+  max-width: 100%;
+}
+.marker .panel-heading {
+  height: 200px;
+}
+.marker .channel-title {
+  text-align: center;
+}
+
+/* player */
+.box {
+    position: relative;
+    margin: 2em 0;
+    padding: 25px 10px 7px;
+    border: solid 2px #71C9CE;
+}
+.box .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -2px;
+    left: -2px;
+    padding: 0 9px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 17px;
+    background: #71C9CE;
+    color: #ffffff;
+    font-weight: bold;
+}
+.box28 p {
+    margin: 0; 
+    padding: 0;
 }
