@@ -58,3 +58,7 @@ gem 'google-api-client', '~> 0.11'
 gem 'dotenv-rails'
 gem 'pry-byebug'
 gem 'pry-rails'
+
+group :production do
+  gem 'pg', '0.21.0'
+end
